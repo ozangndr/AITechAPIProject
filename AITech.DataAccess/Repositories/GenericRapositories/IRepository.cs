@@ -12,7 +12,7 @@ namespace AITech.DataAccess.Repositories.GenericRapositories
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);
         Task CreateAsync(TEntity entity);
-        Task UpdateAsync(TEntity entity);
-        Task DeleteAsync(int id);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
     }
 }

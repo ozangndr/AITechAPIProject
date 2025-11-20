@@ -14,14 +14,12 @@ namespace AITech.DataAccess.Repositories.GenericRapositories
         public async Task CreateAsync(TEntity entity)
         {
             await _context.AddAsync(entity);
-            await  _context.SaveChangesAsync();
-        }
+            
+        }       
 
-        public async Task DeleteAsync(int id)
-        {
-            var entity = await GetByIdAsync(id);
-            _context.Remove(entity);
-            await _context.SaveChangesAsync();
+        public void Delete(TEntity entity)
+        {            
+            _context.Remove(entity);            
         }
 
         public Task<List<TEntity>> GetAllAsync()
@@ -34,10 +32,9 @@ namespace AITech.DataAccess.Repositories.GenericRapositories
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public  void Update(TEntity entity)
         {
             _context.Update(entity);
-            await _context.SaveChangesAsync();
         }
     }
 }
