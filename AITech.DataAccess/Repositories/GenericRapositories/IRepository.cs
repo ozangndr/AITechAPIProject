@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.GenericRapositories
+namespace AITech.DataAccess.Repositories.GenericRapository
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {

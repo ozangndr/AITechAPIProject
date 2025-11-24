@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.ProjectRepositories
+namespace AITech.DataAccess.Repositories.ChooseRepositories
 {
-    public class ProjectRepository : GenericRepository<Project>, IProjectRepository
+    public class ChooseRepository : GenericRepository<Choose>, IChooseRepository
     {
-        public ProjectRepository(AppDbContext _context) : base(_context)
+        public ChooseRepository(AppDbContext _context) : base(_context)
         {
         }
     }

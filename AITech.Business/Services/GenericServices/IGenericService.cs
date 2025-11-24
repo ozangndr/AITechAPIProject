@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.Business.Services.GenericServices
+namespace AITech.Business.Services.GenericService
 {
     public interface IGenericService<TResultDto,TCreateDto,TUpdateDto>
     {

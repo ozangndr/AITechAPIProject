@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.ProjectRepositories
+namespace AITech.DataAccess.Repositories.BannerRepositories
 {
-    public class ProjectRepository : GenericRepository<Project>, IProjectRepository
+    public class BannerRepository : GenericRepository<Banner>, IBannerRepository
     {
-        public ProjectRepository(AppDbContext _context) : base(_context)
+        public BannerRepository(AppDbContext _context) : base(_context)
         {
         }
     }

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.CategoryRepositories
+namespace AITech.DataAccess.Repositories.SocialRepositories
 {
-    public interface ICategoryRepository:IRepository<Category>
+    public interface ISocialRepository:IRepository<Social>
     {
     }
 }

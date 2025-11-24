@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.CategoryRepositories
+namespace AITech.DataAccess.Repositories.FAQRepositories
 {
-    public interface ICategoryRepository:IRepository<Category>
+    public interface IFAQRepository:IRepository<FAQ>
     {
     }
 }

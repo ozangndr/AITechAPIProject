@@ -1,4 +1,4 @@
-﻿using AITech.Business.Services.GenericServices;
+﻿using AITech.Business.Services.GenericService;
 using AITech.DTO.CategoryDtos;
 using System;
 using System.Collections.Generic;

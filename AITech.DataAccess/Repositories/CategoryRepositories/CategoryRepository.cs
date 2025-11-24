@@ -1,5 +1,5 @@
 ﻿using AITech.DataAccess.Context;
-using AITech.DataAccess.Repositories.GenericRapositories;
+using AITech.DataAccess.Repositories.GenericRapository;
 using AITech.Entity.Entities;
 using System;
 using System.Collections.Generic;

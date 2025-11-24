@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AITech.DataAccess.Repositories.ProjectRepositories
+namespace AITech.DataAccess.Repositories.AboutRepositories
 {
-    public class ProjectRepository : GenericRepository<Project>, IProjectRepository
+    public class AboutRepository : GenericRepository<About>, IAboutRepository
     {
-        public ProjectRepository(AppDbContext _context) : base(_context)
+        public AboutRepository(AppDbContext _context) : base(_context)
         {
         }
     }
