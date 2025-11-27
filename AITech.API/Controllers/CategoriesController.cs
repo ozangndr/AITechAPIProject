@@ -38,5 +38,27 @@ namespace AITech.API.Controllers
             return Ok("Kategori Güncellendi");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _categoryService.TDeleteAsync(id);
+                // Başarılıysa 204 No Content dönerek Body'de gereksiz metin göndermekten kaçının.
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Loglama yapın: Hatanın detayını burada loglamak çok önemlidir!
+                // _logger.LogError(ex, "Kategori silinirken hata oluştu.");
+
+                // Kullanıcıya anlaşılır bir mesaj ve 400 Bad Request dönmek daha iyi.
+                return BadRequest("Silme işlemi başarısız. Bu kategoriye bağlı Projeler olabilir veya bir veritabanı kısıtlaması ihlal edilmiş olabilir.");
+
+                // Eğer hata gerçekten bilinmeyen bir sunucu hatasıysa 500 dönebilirsiniz.
+                // return StatusCode(500, "Sunucu tarafında beklenmedik bir hata oluştu.");
+            }
+        }
+
     }
 }
