@@ -1,60 +1,60 @@
-﻿using AITech.WebUI.DTOs.AboutDtos;
+﻿using AITech.WebUI.DTOs.FAQDtos;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace AITech.WebUI.Services.AboutServices
+namespace AITech.WebUI.Services.FAQServices
 {
-    public class AboutService
+    public class FAQService
     {
         private readonly HttpClient _client;
 
-        public AboutService(HttpClient client)
+        public FAQService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://localhost:7144/api/");
             _client = client;
         }
 
-        public async Task CreateAsync(CreateAboutDto dto)
+        public async Task CreateAsync(CreateFAQDto dto)
         {
             var json = JsonConvert.SerializeObject(dto);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Abouts", content);
+            await _client.PostAsync("FAQs", content);
         }
 
         public async Task DeleteAsync(int id)
         {
-            await _client.DeleteAsync("Abouts/" + id);
+            await _client.DeleteAsync("FAQs/" + id);
         }
 
-        public async Task<List<ResultAboutDto>> GetAllAsync()
+        public async Task<List<ResultFAQDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Abouts");
+            var response = await _client.GetAsync("FAQs");
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Liste alınamadı");
             }
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonContent);
+            var values = JsonConvert.DeserializeObject<List<ResultFAQDto>>(jsonContent);
             return values;
         }
 
-        public async Task<UpdateAboutDto> GetByIdAsync(int id)
+        public async Task<UpdateFAQDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Abouts" + id);
+            var response = await _client.GetAsync("FAQs" + id);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Liste alınamadı");
             }
             var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateAboutDto>(json);
+            var value = JsonConvert.DeserializeObject<UpdateFAQDto>(json);
             return value;
         }
 
-        public async Task UpdateAsync(UpdateAboutDto dto)
+        public async Task UpdateAsync(UpdateFAQDto dto)
         {
             var json = JsonConvert.SerializeObject(dto);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Abouts", content);
+            await _client.PutAsync("FAQs", content);
 
         }
     }
