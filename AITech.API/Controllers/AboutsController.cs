@@ -11,7 +11,7 @@ namespace AITech.API.Controllers
     public class AboutsController(IAboutService _aboutService) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             var values =await _aboutService.TGetAllAsync();
             return Ok(values);
@@ -38,7 +38,7 @@ namespace AITech.API.Controllers
             return Ok("Hakkımızda bilgisi güncellendi");
         }
 
-        [HttpDelete] 
+        [HttpDelete("{id}")] 
         public async Task<IActionResult> Delete(int id)
         {
             await _aboutService.TDeleteAsync(id);

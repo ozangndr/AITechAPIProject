@@ -26,5 +26,20 @@ namespace AITech.WebUI.Areas.Admin.Controllers
             await _categoryService.CreateAsync(createCategoryDto);
             return RedirectToAction("Index");
         }
+
+
+        public async Task<IActionResult> UpdateCategory(int id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            return View(category);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        {
+            await _categoryService.UpdateAsync(updateCategoryDto);
+            return RedirectToAction("Index");
+        }
+
     }
 }
