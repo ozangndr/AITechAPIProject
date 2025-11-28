@@ -8,7 +8,7 @@ namespace AITech.WebUI.Services.CategoryServices
         Task<UpdateCategoryDto> GetByIdAsync(int id);
         Task CreateAsync(CreateCategoryDto createCategoryDto);
         Task UpdateAsync(UpdateCategoryDto updateCategoryDto);
-        Task DeleteAsync(int id);        
+        Task DeleteAsync(int id);      
 
     }
 }
