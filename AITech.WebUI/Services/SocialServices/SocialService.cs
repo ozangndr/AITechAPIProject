@@ -16,9 +16,7 @@ namespace AITech.WebUI.Services.SocialServices
 
         public async Task CreateAsync(CreateSocialDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Socials", content);
+            await _client.PostAsJsonAsync("Socials", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -28,33 +26,17 @@ namespace AITech.WebUI.Services.SocialServices
 
         public async Task<List<ResultSocialDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Projects");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultSocialDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultSocialDto>>("Socials");
         }
 
         public async Task<UpdateSocialDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Socials" + id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateSocialDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateSocialDto>("Socials/" + id);
         }
 
         public async Task UpdateAsync(UpdateSocialDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Socials", content);
+            await _client.PutAsJsonAsync("Socials", dto);
 
         }
     }

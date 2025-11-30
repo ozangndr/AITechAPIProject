@@ -8,7 +8,7 @@ namespace AITech.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SocialController(ISocialService _socialService) : Controller
+    public class SocialsController(ISocialService _socialService) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()

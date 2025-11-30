@@ -1,16 +1,16 @@
-﻿using AITech.WebUI.DTOs.AboutDtos;
-using AITech.WebUI.Services.AboutServices;
+﻿using AITech.WebUI.DTOs.SocialDtos;
+using AITech.WebUI.Services.SocialServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AITech.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AboutController(IAboutService _aboutService) : Controller
+    public class SocialController(ISocialService _socialService) : Controller
     {
         public async Task<IActionResult> Index()
         {
-            var categories = await _aboutService.GetAllAsync();
-            return View(categories);
+            var values = await _socialService.GetAllAsync();
+            return View(values);
         }
 
 
@@ -20,29 +20,29 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAboutDto dto)
+        public async Task<IActionResult> Create(CreateSocialDto dto)
         {
-            await _aboutService.CreateAsync(dto);
+            await _socialService.CreateAsync(dto);
             return RedirectToAction("Index");
         }
 
 
         public async Task<IActionResult> Update(int id)
         {
-            var category = await _aboutService.GetByIdAsync(id);
-            return View(category);
+            var value = await _socialService.GetByIdAsync(id);
+            return View(value);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateAboutDto dto)
+        public async Task<IActionResult> Update(UpdateSocialDto dto)
         {
-            await _aboutService.UpdateAsync(dto);
+            await _socialService.UpdateAsync(dto);
             return RedirectToAction("Index");
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            await _aboutService.DeleteAsync(id);
+            await _socialService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
     }

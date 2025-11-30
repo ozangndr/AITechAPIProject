@@ -16,9 +16,7 @@ namespace AITech.WebUI.Services.AboutServices
 
         public async Task CreateAsync(CreateAboutDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Abouts", content);
+            await _client.PostAsJsonAsync("Abouts", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -28,33 +26,17 @@ namespace AITech.WebUI.Services.AboutServices
 
         public async Task<List<ResultAboutDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Abouts");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultAboutDto>>("Abouts");
         }
 
         public async Task<UpdateAboutDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Abouts" + id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateAboutDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateAboutDto>("Abouts/" + id);
         }
 
         public async Task UpdateAsync(UpdateAboutDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Abouts", content);
+            await _client.PutAsJsonAsync("Abouts", dto);
 
         }
     }

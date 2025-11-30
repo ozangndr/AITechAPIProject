@@ -1,4 +1,5 @@
 ﻿using AITech.WebUI.DTOs.CategoryDtos;
+using Humanizer;
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json;
@@ -15,11 +16,9 @@ namespace AITech.WebUI.Services.CategoryServices
             _client = client;
         }
 
-        public async Task CreateAsync(CreateCategoryDto createCategoryDto)
+        public async Task CreateAsync(CreateCategoryDto dto)
         {
-            var json=JsonConvert.SerializeObject(createCategoryDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Categories", content);
+            await _client.PostAsJsonAsync("Categories", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -29,33 +28,17 @@ namespace AITech.WebUI.Services.CategoryServices
 
         public async Task<List<ResultCategoryDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Categories");
-            if(! response.IsSuccessStatusCode)
-            {
-                throw new Exception("Kategori listesi alınamadı");
-            }
-            var jsonContent=await response.Content.ReadAsStringAsync();
-            var values=JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultCategoryDto>>("Categories");
         }
 
         public async Task<UpdateCategoryDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Categories"+id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Kategori listesi alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateCategoryDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateCategoryDto>("Categories/" + id);
         }
 
-        public async Task UpdateAsync(UpdateCategoryDto updateCategoryDto)
+        public async Task UpdateAsync(UpdateCategoryDto dto)
         {
-            var json = JsonConvert.SerializeObject(updateCategoryDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Categories",content);
+            await _client.PutAsJsonAsync("Categories", dto);
 
         }
     }

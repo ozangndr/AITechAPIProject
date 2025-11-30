@@ -12,9 +12,16 @@ namespace AITech.API.Controllers
     public class ProjectsController(IProjectService _projectService) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetProjects()
+        public async Task<IActionResult> GetAll()
         {
             var values=await _projectService.TGetAllAsync();
+            return Ok(values);
+        }
+
+        [HttpGet("WithCategories")]
+        public async Task<IActionResult> GetAllWithCategories()
+        {
+            var values = await _projectService.TGetProjectWithCategoriesAsync();
             return Ok(values);
         }
 
@@ -22,28 +29,31 @@ namespace AITech.API.Controllers
         public async Task<IActionResult> Create(CreateProjectDto createProjectDto)
         {
             await _projectService.TCreateAsync(createProjectDto);
-            return Ok("Yeni Proje Eklendi.");
+            return Created();
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(UpdateProjectDto updateProjectDto)
         {
             await _projectService.TUpdateAsync(updateProjectDto);
-            return Ok("Proje Güncellendi.");
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _projectService.TDeleteAsync(id);
-            return Ok("Proje Silindi.");
+            return NoContent();
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var value = await _projectService.TGetByIdAsync(id);
+            if (value is null)
+            {
+                return BadRequest("Proje Bulunamadı");
+            }
             return Ok(value);
         }
     }

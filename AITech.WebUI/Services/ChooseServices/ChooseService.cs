@@ -16,9 +16,7 @@ namespace AITech.WebUI.Services.ChooseServices
 
         public async Task CreateAsync(CreateChooseDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Chooses", content);
+            await _client.PostAsJsonAsync("Chooses", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -28,33 +26,17 @@ namespace AITech.WebUI.Services.ChooseServices
 
         public async Task<List<ResultChooseDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Chooses");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultChooseDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultChooseDto>>("Chooses");
         }
 
         public async Task<UpdateChooseDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Chooses" + id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateChooseDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateChooseDto>("Chooses/" + id);
         }
 
         public async Task UpdateAsync(UpdateChooseDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Chooses", content);
+            await _client.PutAsJsonAsync("Chooses", dto);
 
         }
     }

@@ -48,6 +48,12 @@ namespace AITech.Business.Services.ProjectServices
             return project.Adapt<ResultProjectDto>();
         }
 
+        public async Task<List<ResultProjectDto>> TGetProjectWithCategoriesAsync()
+        {
+            var projects = await _projectRepository.GetProjectWithCategoriesAsync();
+            return projects.Adapt<List<ResultProjectDto>>();
+        }
+
         public async Task TUpdateAsync(UpdateProjectDto updateDto)
         {
             var project=updateDto.Adapt<Project>();

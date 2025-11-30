@@ -16,9 +16,7 @@ namespace AITech.WebUI.Services.FeatureServices
 
         public async Task CreateAsync(CreateFeatureDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("Features", content);
+            await _client.PostAsJsonAsync("Features", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -28,33 +26,17 @@ namespace AITech.WebUI.Services.FeatureServices
 
         public async Task<List<ResultFeatureDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("Features");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultFeatureDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultFeatureDto>>("Features");
         }
 
         public async Task<UpdateFeatureDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("Features" + id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateFeatureDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateFeatureDto>("Features/" + id);
         }
 
         public async Task UpdateAsync(UpdateFeatureDto dto)
         {
-            var json = JsonConvert.SerializeObject(dto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("Features", content);
+            await _client.PutAsJsonAsync("Features", dto);
 
         }
     }

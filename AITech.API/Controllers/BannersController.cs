@@ -7,7 +7,7 @@ namespace AITech.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BannerController(IBannerService _bannerService) : Controller
+    public class BannersController(IBannerService _bannerService) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()

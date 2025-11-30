@@ -14,11 +14,9 @@ namespace AITech.WebUI.Services.AboutItemServices
             _client = client;
         }
 
-        public async Task CreateAsync(CreateAboutItemDto createAboutItemDto)
+        public async Task CreateAsync(CreateAboutItemDto dto)
         {
-            var json = JsonConvert.SerializeObject(createAboutItemDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PostAsync("AboutItems", content);
+            await _client.PostAsJsonAsync("AboutItems", dto);
         }
 
         public async Task DeleteAsync(int id)
@@ -28,33 +26,17 @@ namespace AITech.WebUI.Services.AboutItemServices
 
         public async Task<List<ResultAboutItemDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync("AboutItems");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultAboutItemDto>>(jsonContent);
-            return values;
+            return await _client.GetFromJsonAsync<List<ResultAboutItemDto>>("AboutItems");
         }
 
         public async Task<UpdateAboutItemDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync("AboutItems" + id);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Liste alınamadı");
-            }
-            var json = await response.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateAboutItemDto>(json);
-            return value;
+            return await _client.GetFromJsonAsync<UpdateAboutItemDto>("AboutItems/" + id);
         }
 
-        public async Task UpdateAsync(UpdateAboutItemDto updateCategoryDto)
+        public async Task UpdateAsync(UpdateAboutItemDto dto)
         {
-            var json = JsonConvert.SerializeObject(updateCategoryDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await _client.PutAsync("AboutItems", content);
+            await _client.PutAsJsonAsync("AboutItems", dto);
 
         }
     }

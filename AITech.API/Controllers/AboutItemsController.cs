@@ -7,7 +7,7 @@ namespace AITech.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AboutItemController(IAboutItemService _aboutItemService) : Controller
+    public class AboutItemsController(IAboutItemService _aboutItemService) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()

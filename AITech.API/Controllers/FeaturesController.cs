@@ -7,7 +7,7 @@ namespace AITech.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeatureController(IFeatureService _featureService) : Controller
+    public class FeaturesController(IFeatureService _featureService) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> GetAll()
