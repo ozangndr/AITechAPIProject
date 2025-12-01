@@ -7,10 +7,10 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="display-6 text-primary">Kategori Listesi</h1>
+        <h1 class="display-6 text-primary">Proje Listesi</h1>
 
         <a href="/Admin/Project/Create" class="btn btn-success btn-lg shadow-sm">
-            <i class="fas fa-plus-circle"></i> Yeni Kategori Ekle
+            <i class="fas fa-plus-circle"></i> Yeni Proje Ekle
         </a>
     </div>
 
@@ -33,7 +33,7 @@
                         <tr>
                             <th scope="row">@count</th>
                             <td>@item.Title</td>
-                            <td><img src="@item.ImageUrl" alt="İkonu" style="width: 32px; height: 32px;" class="img-thumbnail" /></td>
+                            <td><img src="@item.ImageUrl" alt="İkonu" style="width: 128px; height: 128px;" class="img-thumbnail" /></td>
                             <td>@item.Category.Name</td>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
