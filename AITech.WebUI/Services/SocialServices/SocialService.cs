@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.SocialServices
 {
-    public class SocialService
+    public class SocialService:ISocialService
     {
         private readonly HttpClient _client;
 

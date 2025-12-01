@@ -1,0 +1,35 @@
+﻿@model CreateSocialDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Admin/Index.cshtml";
+}
+
+<h1>Yeni Sosyal Medya oluştur</h1>
+
+<form method="post">
+    <label>Başlık</label>
+    <input asp-for="Name" class="form-control" />
+    <br />
+
+    <label>Açıklama</label>
+    <input asp-for="Url" class="form-control" />
+    <br />
+
+    <div class="mb-4">
+        <label asp-for="Icon" class="form-label fw-bold">Görsel URL</label>
+        <input type="text" asp-for="Icon" class="form-control" placeholder="Görselin URL adresini girin" />
+        <span asp-validation-for="Icon" class="text-danger"></span>
+        @* Mevcut görseli göstermek için *@
+        @if (!string.IsNullOrEmpty(Model.Icon))
+        {
+            <div class="mt-2">
+                <img src="@Model.Icon" alt="Mevcut Görsel" class="img-thumbnail" style="max-width: 200px; height: auto;" />
+                <small class="form-text text-muted d-block mt-1">Mevcut görsel önizlemesi.</small>
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-primary">Kaydet</button>
+
+</form>
+

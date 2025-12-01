@@ -1,0 +1,39 @@
+﻿@model CreateProjectDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Admin/Index.cshtml";
+}
+
+<h1>Yeni Proje oluştur</h1>
+
+<form method="post">
+    <label>Başlık</label>
+    <input asp-for="Title" class="form-control" />
+    <br />
+
+    <div class="mb-4">
+        <label for="CategoryId" class="form-label">Kategori Seçin</label>
+        @* asp-for="CategoryId": Seçilen değerin modeldeki CategoryId alanına atanmasını sağlar *@
+        @* asp-items="ViewBag.CategoryList": Controller'dan gelen SelectListItem listesini dropdown'a doldurur *@
+        <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-control">
+            <option value="">-- Kategori Seçiniz --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="ImageUrl" class="form-label fw-bold">Görsel URL</label>
+        <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Görselin URL adresini girin" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="mt-2">
+                <img src="@Model.ImageUrl" alt="Mevcut Görsel" class="img-thumbnail" style="max-width: 200px; height: auto;" />
+                <small class="form-text text-muted d-block mt-1">Mevcut görsel önizlemesi.</small>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+
+</form>

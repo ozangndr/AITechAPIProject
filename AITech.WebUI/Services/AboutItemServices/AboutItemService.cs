@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.AboutItemServices
 {
-    public class AboutItemService
+    public class AboutItemService:IAboutItemService
     {
         private readonly HttpClient _client;
 

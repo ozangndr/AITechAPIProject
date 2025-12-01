@@ -9,8 +9,8 @@ namespace AITech.WebUI.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            var categories = await _aboutService.GetAllAsync();
-            return View(categories);
+            var values = await _aboutService.GetAllAsync();
+            return View(values);
         }
 
 
@@ -27,17 +27,18 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update()
         {
-            var category = await _aboutService.GetByIdAsync(id);
-            return View(category);
+            var values = await _aboutService.GetAllAsync();
+            var value = values.OrderByDescending(x=>x.Id).FirstOrDefault();
+            return View(value);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateAboutDto dto)
         {
             await _aboutService.UpdateAsync(dto);
-            return RedirectToAction("Index");
+            return RedirectToAction("Update");
         }
 
         public async Task<ActionResult> Delete(int id)

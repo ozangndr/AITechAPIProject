@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.ChooseServices
 {
-    public class ChooseService
+    public class ChooseService:IChooseService
     {
         private readonly HttpClient _client;
 

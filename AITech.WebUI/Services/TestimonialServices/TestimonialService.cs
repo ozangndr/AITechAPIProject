@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.TestimonialServices
 {
-    public class TestimonialService
+    public class TestimonialService:ITestimonialService
     {
         private readonly HttpClient _client;
 

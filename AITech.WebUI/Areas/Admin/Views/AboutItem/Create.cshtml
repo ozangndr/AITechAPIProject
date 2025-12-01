@@ -1,0 +1,13 @@
+﻿@model CreateAboutItemDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Admin/Index.cshtml";
+}
+
+<form method="post">
+    <label>İtem</label>
+    <input asp-for="Title" class="form-control" required/>
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+</form>
+

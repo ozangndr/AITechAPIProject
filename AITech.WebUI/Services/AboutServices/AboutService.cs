@@ -1,10 +1,8 @@
 ﻿using AITech.WebUI.DTOs.AboutDtos;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace AITech.WebUI.Services.AboutServices
 {
-    public class AboutService
+    public class AboutService:IAboutService
     {
         private readonly HttpClient _client;
 

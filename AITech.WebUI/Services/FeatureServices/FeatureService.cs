@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.FeatureServices
 {
-    public class FeatureService
+    public class FeatureService:IFeatureService
     {
         private readonly HttpClient _client;
 

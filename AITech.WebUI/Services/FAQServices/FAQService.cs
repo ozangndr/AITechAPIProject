@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.FAQServices
 {
-    public class FAQService
+    public class FAQService:IFAQService
     {
         private readonly HttpClient _client;
 

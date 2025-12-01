@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AITech.WebUI.Services.BannerServices
 {
-    public class BannerService
+    public class BannerService:IBannerService
     {
         private readonly HttpClient _client;
 

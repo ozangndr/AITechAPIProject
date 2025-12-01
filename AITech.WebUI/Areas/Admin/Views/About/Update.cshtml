@@ -1,0 +1,69 @@
+﻿@model ResultAboutDto 
+@{
+    ViewData["Title"] = "Hakkımızda Bilgilerini Güncelle";
+    // Admin layout'unu kullanmaya devam ediyoruz
+    Layout = "~/Areas/Admin/Views/Admin/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-6 text-primary">Hakkımızda Bilgilerini Güncelle</h1>
+        @* İsteğe bağlı: Geri dön butonu eklenebilir *@
+        <a href="/Admin/About/Index" class="btn btn-outline-secondary btn-lg shadow-sm">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            @* Formu burada başlatıyoruz. POST işlemi için Controller'daki UpdateAbout metoduna gidecek. *@
+            <form asp-area="Admin" asp-controller="About" asp-action="Update" method="post">
+
+                @* Gizli Id alanı - güncellenecek kaydı belirtmek için *@
+                <input type="hidden" asp-for="Id" />
+
+                @* Başlık Alanı *@
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold">Başlık</label>
+                    <input type="text" asp-for="Title" class="form-control" placeholder="Hakkımızda başlığını girin" required />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                @* Açıklama Alanı *@
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-bold">Açıklama</label>
+                    <textarea asp-for="Description" class="form-control" rows="5" placeholder="Detaylı açıklamayı girin" required></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                @* Görsel URL Alanı *@
+                <div class="mb-4">
+                    <label asp-for="ImageUrl" class="form-label fw-bold">Görsel URL</label>
+                    <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Görselin URL adresini girin" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    @* Mevcut görseli göstermek için *@
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <div class="mt-2">
+                            <img src="@Model.ImageUrl" alt="Mevcut Görsel" class="img-thumbnail" style="max-width: 200px; height: auto;" />
+                            <small class="form-text text-muted d-block mt-1">Mevcut görsel önizlemesi.</small>
+                        </div>
+                    }
+                </div>
+
+                @* Güncelle Butonu *@
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-sync-alt"></i> Bilgileri Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

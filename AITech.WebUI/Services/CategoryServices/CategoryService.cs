@@ -1,8 +1,4 @@
 ﻿using AITech.WebUI.DTOs.CategoryDtos;
-using Humanizer;
-using Newtonsoft.Json;
-using System.Text;
-using System.Text.Json;
 
 namespace AITech.WebUI.Services.CategoryServices
 {
