@@ -41,7 +41,7 @@ namespace AITech.Business.Services.BannerServices
                 throw new Exception("Kayıt Bulunamadı");
             }
             return value.Adapt<ResultBannerDto>();
-        }
+        }       
 
         public async Task TUpdateAsync(UpdateBannerDto updateDto)
         {
@@ -53,5 +53,29 @@ namespace AITech.Business.Services.BannerServices
             _bannerRepository.Adapt(value);
             await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task TMakeActiveAsync(int id)
+        {
+            var value=await _bannerRepository.GetByIdAsync(id);
+            if (value == null)
+            {
+                throw new Exception("Kayıt Bulunamadı");
+            }
+            await _bannerRepository.MakeActiveAsync(value);
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task TMakePassiveAsync(int id)
+        {
+            var value =await  _bannerRepository.GetByIdAsync(id);
+            if (value == null)
+            {
+                throw new Exception("Kayıt Bulunamadı");
+            }
+            await _bannerRepository.MakePassiveAsync(value);
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+
     }
 }

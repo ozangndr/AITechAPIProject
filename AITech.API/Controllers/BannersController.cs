@@ -12,15 +12,15 @@ namespace AITech.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var values=await _bannerService.TGetAllAsync();
+            var values = await _bannerService.TGetAllAsync();
             return Ok(values);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var value=await _bannerService.TGetByIdAsync(id);
-            if(value is null)
+            var value = await _bannerService.TGetByIdAsync(id);
+            if (value is null)
             {
                 throw new Exception("Banner bulunamadı");
             }
@@ -31,7 +31,7 @@ namespace AITech.API.Controllers
         public async Task<IActionResult> Create(CreateBannerDto createBannerDto)
         {
             await _bannerService.TCreateAsync(createBannerDto);
-            return Ok("Banner oluşturuldu");
+            return Created();
         }
 
         [HttpPut]
@@ -46,6 +46,23 @@ namespace AITech.API.Controllers
         {
             await _bannerService.TDeleteAsync(id);
             return NoContent();
+        }
+
+
+        [HttpPatch("makeActive/{id}")]
+        public async Task<IActionResult> MakeActive(int id)
+        {
+            await _bannerService.TMakeActiveAsync(id);
+            return NoContent();
+
+        }
+
+        [HttpPatch("makePassive/{id}")]
+        public async Task<IActionResult> MakePassive(int id)
+        {
+            await _bannerService.TMakePassiveAsync(id);
+            return NoContent();
+
         }
     }
 }

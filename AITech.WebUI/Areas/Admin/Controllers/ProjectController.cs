@@ -17,7 +17,7 @@ namespace AITech.WebUI.Areas.Admin.Controllers
 
             // LINQ kullanarak List<SelectListItem> formatına dönüştürür.
             List<SelectListItem> categoryList = (from x in values
-                                                                                    select new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                                                                                    select new SelectListItem
                                                                                     {
                                                                                         Text = x.Name,
                                                                                         Value = x.Id.ToString()
@@ -43,6 +43,11 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProjectDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                await GetCategories();
+                return View(dto);
+            }
             await _projectService.CreateAsync(dto);
             return RedirectToAction("Index");
         }
@@ -58,6 +63,7 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateProjectDto dto)
         {
+            await GetCategories();
             await _projectService.UpdateAsync(dto);
             return RedirectToAction("Index");
         }

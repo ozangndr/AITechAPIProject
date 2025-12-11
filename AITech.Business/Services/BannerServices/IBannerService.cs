@@ -1,6 +1,7 @@
 ﻿using AITech.Business.Services.GenericService;
 using AITech.DataAccess.Repositories.GenericRapository;
 using AITech.DTO.BannerDtos;
+using AITech.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace AITech.Business.Services.BannerServices
 {
     public interface IBannerService:IGenericService<ResultBannerDto,CreateBannerDto,UpdateBannerDto>
     {
+        Task TMakeActiveAsync(int id);
+        Task TMakePassiveAsync(int id);
     }
 }

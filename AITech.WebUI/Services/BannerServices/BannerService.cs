@@ -32,12 +32,22 @@ namespace AITech.WebUI.Services.BannerServices
         public async Task<UpdateBannerDto> GetByIdAsync(int id)
         {
             return await _client.GetFromJsonAsync<UpdateBannerDto>("Banners/" + id);
-        }
+        }               
 
         public async Task UpdateAsync(UpdateBannerDto dto)
         {
             await _client.PutAsJsonAsync("Banners", dto);
 
+        }
+
+        public async Task MakeActiveAsync(int id)
+        {
+            await _client.PatchAsync("Banners/MakeActive/" + id,null);
+        }
+
+        public async Task MakePassiveAsync(int id)
+        {
+            await _client.PatchAsync("Banners/MakePassive/" + id, null);
         }
     }
 }

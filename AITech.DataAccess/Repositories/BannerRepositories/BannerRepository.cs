@@ -14,5 +14,15 @@ namespace AITech.DataAccess.Repositories.BannerRepositories
         public BannerRepository(AppDbContext _context) : base(_context)
         {
         }
+
+        public async Task MakeActiveAsync(Banner banner)
+        {
+            banner.IsActive = true;
+        }
+
+        public async Task MakePassiveAsync(Banner banner)
+        {
+            banner.IsActive = false;
+        }
     }
 }

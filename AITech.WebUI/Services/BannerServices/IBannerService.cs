@@ -9,5 +9,8 @@ namespace AITech.WebUI.Services.BannerServices
         Task CreateAsync(CreateBannerDto createBannerDto);
         Task UpdateAsync(UpdateBannerDto updateBannerDto);
         Task DeleteAsync(int id);
+
+        Task MakeActiveAsync(int id);
+        Task MakePassiveAsync(int id);
     }
 }

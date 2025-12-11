@@ -47,5 +47,17 @@ namespace AITech.WebUI.Areas.Admin.Controllers
             await _bannerService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> MakeActive(int id)
+        {
+            await _bannerService.MakeActiveAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> MakePassive(int id)
+        {
+            await _bannerService.MakePassiveAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }
