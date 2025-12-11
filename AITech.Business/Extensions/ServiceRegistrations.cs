@@ -5,8 +5,10 @@ using AITech.Business.Services.CategoryServices;
 using AITech.Business.Services.ChooseServices;
 using AITech.Business.Services.FAQServices;
 using AITech.Business.Services.FeatureServices;
+using AITech.Business.Services.MessageServices;
 using AITech.Business.Services.ProjectServices;
 using AITech.Business.Services.SocialServices;
+using AITech.Business.Services.StaffServices;
 using AITech.Business.Services.TestimonialServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -31,6 +33,8 @@ namespace AITech.Business.Extensions
             services.AddScoped<IFAQService, FAQService>();
             services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<ISocialService, SocialService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IStaffService, StaffService>();
         }
     }
 }
