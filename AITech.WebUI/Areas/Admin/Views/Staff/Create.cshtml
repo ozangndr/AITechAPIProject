@@ -1,0 +1,45 @@
+﻿@model CreateStaffDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Admin/Index.cshtml";
+}
+
+<h1>Yeni Çalışan Kaydı</h1>
+
+<form method="post">
+    <label>Ad Soyad</label>
+    <input asp-for="Name" class="form-control" />
+    <br />
+
+    <label>Ünvan</label>
+    <input asp-for="Title" class="form-control" />
+    <br />
+
+    <label>Sosyal Medya 1</label>
+    <input asp-for="Social1" class="form-control" />
+    <br />
+
+    <label>Sosyal Medya 2</label>
+    <input asp-for="Social2" class="form-control" />
+    <br />
+
+    <label>Sosyal Medya 3</label>
+    <input asp-for="Social3" class="form-control" />
+    <br />
+
+    <label>Sosyal Medya 4</label>
+    <input asp-for="Social4" class="form-control" />
+    <br />
+
+    <div class="mb-4">
+        <label asp-for="ImageUrl" class="form-label fw-bold">Görsel URL</label>
+        <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Görselin URL adresini girin" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+
+    </div>
+
+    <button class="btn btn-primary">Kaydet</button>
+
+</form>
+
+

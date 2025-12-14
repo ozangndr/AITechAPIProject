@@ -41,7 +41,7 @@ namespace AITech.Business.Services.FAQServices
         public async Task<ResultFAQDto> TGetByIdAsync(int id)
         {
             var value = await _fAQRepository.GetByIdAsync(id);
-            if (value != null)
+            if (value is null)
             {
                 throw new Exception("Kayıt Bulunamadı");
             }

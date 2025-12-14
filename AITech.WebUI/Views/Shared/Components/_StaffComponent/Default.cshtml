@@ -1,0 +1,57 @@
+﻿@using AITech.WebUI.DTOs.StaffDtos
+@model List<ResultStaffDto>
+@*
+    Staff
+*@
+
+<div class="container-fluid bg-light py-5" id="staff">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Ekibimiz</div>
+                <h1 class="mb-4">Ekip arkadaşlarımız ile Tanıştınız mı ?</h1>
+                <p class="mb-4">
+                    Yapay zeka alanındaki tecrübemiz, 10 yılı aşkın süredir devam eden köklü Ar-Ge geçmişimize dayanmaktadır. Ekibimiz, derin öğrenme, doğal dil işleme ve bilgisayarlı görü gibi en ileri AI disiplinlerinde uzmanlaşmış mühendisler ve veri bilimcilerinden oluşur. Bu birikim sayesinde, projeleriniz için sadece teknolojik olarak gelişmiş değil, aynı zamanda sektörel ihtiyaçlarınıza tam olarak uyarlanmış, garantili ve sürdürülebilir çözümler sunmayı taahhüt ediyoruz.
+                </p>
+                <a class="btn btn-primary rounded-pill px-4" href="">Read More</a>
+            </div>
+
+
+            <div class="col-lg-7">
+                <div class="row g-4">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-6">
+                            <div class="row g-4">
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4" src="@item.ImageUrl" alt="">
+                                        <h5 class="mb-0">@item.Name</h5>
+                                        <small>@item.Title</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href="@item.Social1">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                            <a class="btn btn-square btn-primary m-1" href="@item.Social2">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a class="btn btn-square btn-primary m-1" href="@item.Social3">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                            <a class="btn btn-square btn-primary m-1" href="@item.Social4">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

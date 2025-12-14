@@ -1,0 +1,85 @@
+﻿@using AITech.WebUI.DTOs.FAQDtos
+@model List<ResultFAQDto>
+
+@{
+    // 1. Listenin toplam eleman sayısını bul
+    var totalCount = Model.Count;
+    // 2. Listenin yarı sayısını (tek sayı ise yukarı yuvarlanır) bul
+    var halfCount = (int)Math.Ceiling(totalCount / 2.0);
+
+    // 3. İlk yarıyı al (Sol Sütun)
+    var leftColumnItems = Model.Take(halfCount).ToList();
+    // 4. Kalan yarısını atla ve al (Sağ Sütun)
+    var rightColumnItems = Model.Skip(halfCount).ToList();
+
+    // Her iki sütundaki Akordiyonların ebeveyn ID'lerini tanımla (Her sütun kendi içinde bağımsız çalışır)
+    var leftParentId = "accordionFAQLeft";
+    var rightParentId = "accordionFAQRight";
+}
+
+<div class="container-fluid py-5" id="faq">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Popüler SSS</div>
+            <h1 class="mb-4">Sıkça Sorulan Sorular</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="accordion" id="@leftParentId">
+                    @* SOL SÜTUN ANA AKORDİYON ID'si *@
+                    @foreach (var item in leftColumnItems)
+                    {
+                        // HER ÖĞE İÇİN BENZERSİZ ID'LER OLUŞTUR
+                        var targetId = "collapse_" + item.Id;
+                        var headingId = "heading_" + item.Id;
+
+                        <div class="accordion-item wow fadeIn" data-wow-delay="0.1s">
+                            <h2 class="accordion-header" id="@headingId">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#@targetId" aria-expanded="false" aria-controls="@targetId">
+                                    @item.Question
+                                </button>
+                            </h2>
+                            <div id="@targetId" class="accordion-collapse collapse" aria-labelledby="@headingId"
+                                 data-bs-parent="#@leftParentId">
+                                @* KENDİ SÜTUNUNUN PARENT ID'sini İŞARET EDİYOR *@
+                                <div class="accordion-body">
+                                    @item.Answer
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accordion" id="@rightParentId">
+                    @* SAĞ SÜTUN ANA AKORDİYON ID'si *@
+                    @foreach (var item in rightColumnItems)
+                    {
+                        // HER ÖĞE İÇİN BENZERSİZ ID'LER OLUŞTURULUYOR
+                        var targetId = "collapse_" + item.Id;
+                        var headingId = "heading_" + item.Id;
+
+                        <div class="accordion-item wow fadeIn" data-wow-delay="0.1s">
+                            <h2 class="accordion-header" id="@headingId">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#@targetId" aria-expanded="false" aria-controls="@targetId">
+                                    @item.Question
+                                </button>
+                            </h2>
+                            <div id="@targetId" class="accordion-collapse collapse" aria-labelledby="@headingId"
+                                 data-bs-parent="#@rightParentId">
+                                @* KENDİ SÜTUNUNUN PARENT ID'sini İŞARET EDİYOR *@
+                                <div class="accordion-body">
+                                    @item.Answer
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

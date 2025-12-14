@@ -1,0 +1,53 @@
+﻿@using AITech.WebUI.DTOs.ProjectDtos
+@model List<ResultProjectDto>
+
+<div class="container-fluid bg-light py-5" id="project">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Projeler</div>
+            <h1 class="mb-4">Projelerimizi İnceleyin</h1>
+        </div>
+
+        <div class="owl-carousel project-carousel owl-theme wow fadeIn" data-wow-delay="0.3s">
+
+            @foreach (var item in Model)
+            {
+                <div class="item">
+                    <div class="case-item position-relative overflow-hidden rounded mb-2">
+                        <img class="img-fluid"
+                             src="@item.ImageUrl"
+                             alt="@item.Title"
+                             style="height: 250px; object-fit: cover;"> <a class="case-overlay text-decoration-none" href="">
+                            <small>@item.Category.Name</small>
+                            <h5 class="lh-base text-white mb-3">
+                                @item.Title
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $(".project-carousel").owlCarousel({
+            loop: true, // Sonsuz döngü
+            margin: 25, // Öğeler arası boşluk
+            nav: true,  // Okları (Navigasyon) göster
+            dots: false, // Noktaları (Pagination) gizle
+            responsive:{
+                0:{
+                    items: 1 // Çok küçük ekranlarda 1 tane göster
+                },
+                768:{
+                    items: 2 // Tabletlerde 2 tane göster
+                },
+                992:{
+                    items: 3 // Büyük ekranlarda 3 tane göster (orijinal col-lg-4'e karşılık gelir)
+                }
+            }
+        });
+    });
+</script>
