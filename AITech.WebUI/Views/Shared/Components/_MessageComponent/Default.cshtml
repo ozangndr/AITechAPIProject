@@ -1,0 +1,107 @@
+﻿@using AITech.WebUI.DTOs.MessageDtos
+@model CreateMessageDto
+@*
+    Message
+*@
+
+<div class="container-fluid py-5" id="contact">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Bize Yazın</div>
+            <h3 class="mb-4">Fikirlerinizi Gerçekleştirelim</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <p class="text-center mb-4">Bir projeniz mi var, yoksa aklınızda çözülmesi gereken karmaşık bir teknik soru mu? İhtiyaçlarınızı en doğru şekilde anlamak, size özel bir yol haritası çizmek ve dönüşümü başlatmak için buradayız. Aşağıdaki formu doldurarak bize ulaşın; uzman ekibimiz en geç 24 saat içinde size dönüş yapacak ve ilk istişare görüşmenizi ayarlayacaktır.</p>
+                <div class="wow fadeIn" data-wow-delay="0.3s">
+                    <form id="contactForm" method="post" asp-controller="UI" asp-action="SendMessage">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Your Name" required>
+                                    <label asp-for="Name">Ad-Soyad</label>
+                                </div>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" asp-for="Email" placeholder="Your Email" required>
+                                    <label asp-for="Email">Email</label>
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" asp-for="Subject" placeholder="Subject" required>
+                                    <label asp-for="Subject">Konu</label>
+                                </div>
+                                <span asp-validation-for="Subject" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" asp-for="Body" style="height: 150px" required></textarea>
+                                    <label asp-for="Body">Mesaj</label>
+                                </div>
+                                <span asp-validation-for="Body" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit" id="submitButton">Send Message</button>
+                            </div>
+
+                            <div class="col-12">
+                                <div id="formMessage" class="mt-3 text-center"></div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Formun gönderilmesini dinle
+    $("#contactForm").submit(function (e) {
+        e.preventDefault(); // Varsayılan form gönderme işlemini durdur
+
+        var form = $(this);
+        var url = form.attr('action'); // Formun asp-action ile belirlenen adresini al
+        var formData = form.serialize(); // Tüm form verilerini al
+        var formMessage = $('#formMessage');
+
+        formMessage.removeClass('text-success text-danger').text('Gönderiliyor...');
+        $('#submitButton').prop('disabled', true); // Butonu devre dışı bırak
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    formMessage.addClass('text-success').text(response.message);
+                    form[0].reset(); // Formu temizle
+                } else {
+                    // Controller'dan gelen hata mesajını göster
+                    formMessage.addClass('text-danger').text(response.message || "Bir hata oluştu.");
+                }
+            },
+            error: function (xhr, status, error) {
+                // Sunucuya ulaşılamama veya ciddi hata
+                formMessage.addClass('text-danger').text("Sunucu hatası! Lütfen daha sonra tekrar deneyin.");
+            },
+            complete: function() {
+                // İşlem bitince butonu tekrar aktif et
+                $('#submitButton').prop('disabled', false);
+            }
+        });
+    });
+</script>
